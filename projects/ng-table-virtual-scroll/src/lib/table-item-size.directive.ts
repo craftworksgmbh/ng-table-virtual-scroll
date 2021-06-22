@@ -1,6 +1,7 @@
+import { VIRTUAL_SCROLL_STRATEGY } from '@angular/cdk/scrolling';
+import { CdkHeaderRowDef } from '@angular/cdk/table';
 import {
-  AfterContentInit,
-  ContentChild,
+  AfterContentInit, ContentChild,
   Directive,
   forwardRef,
   Input,
@@ -8,13 +9,11 @@ import {
   OnChanges,
   OnDestroy
 } from '@angular/core';
-import { VIRTUAL_SCROLL_STRATEGY } from '@angular/cdk/scrolling';
-import { delayWhen, distinctUntilChanged, filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
-import { TableVirtualScrollDataSource } from './table-data-source';
 import { MatTable } from '@angular/material/table';
+import { Subject } from 'rxjs';
+import { distinctUntilChanged, filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { FixedSizeTableVirtualScrollStrategy } from './fixed-size-table-virtual-scroll-strategy';
-import { CdkHeaderRowDef } from '@angular/cdk/table';
-import { of, Subject, timer } from 'rxjs';
+import { TableVirtualScrollDataSource } from './table-data-source';
 
 export function _tableVirtualScrollDirectiveStrategyFactory(tableDir: TableItemSizeDirective) {
   return tableDir.scrollStrategy;
@@ -98,7 +97,6 @@ export class TableItemSizeDirective implements OnChanges, AfterContentInit, OnDe
     this.scrollStrategy.stickyChange
       .pipe(
         filter(() => this.isStickyEnabled()),
-        delayWhen(() => !this.stickyPositions ? timer(0) : of()),
         tap(() => {
           if (!this.stickyPositions) {
             this.initStickyPositions();
@@ -126,9 +124,9 @@ export class TableItemSizeDirective implements OnChanges, AfterContentInit, OnDe
               .renderedRangeStream
               .pipe(
                 map(({
-                       start,
-                       end
-                     }) => typeof start !== 'number' || typeof end !== 'number' ? data : data.slice(start, end))
+                  start,
+                  end
+                }) => typeof start !== 'number' || typeof end !== 'number' ? data : data.slice(start, end))
               )
           )
         )

@@ -118,6 +118,7 @@ export class FixedSizeTableVirtualScrollStrategy implements VirtualScrollStrateg
     if (Math.abs(rowsScrolled) < rowSensitivity) {
       this.viewport.setRenderedContentOffset(renderedOffset);
       this.viewport.setRenderedRange({start, end});
+      this.stickyChange.next(renderedOffset);
       return;
     }
 
@@ -127,6 +128,7 @@ export class FixedSizeTableVirtualScrollStrategy implements VirtualScrollStrateg
     if (renderedOffset === 0 && rowsScrolled < 0) {
       this.viewport.setRenderedContentOffset(renderedOffset);
       this.viewport.setRenderedRange({start, end});
+      this.stickyChange.next(0);
       return;
     }
 
