@@ -71,7 +71,7 @@ export class FixedSizeTableVirtualScrollStrategy implements VirtualScrollStrateg
     if (!this.viewport || !this.rowHeight) {
       return;
     }
-    this.viewport.scrollToOffset((index - 1 ) * this.rowHeight + this.headerHeight, behavior);
+    this.viewport.scrollToOffset(index * this.rowHeight, behavior);
   }
 
   public setConfig(configs: TSVStrategyConfigs) {
