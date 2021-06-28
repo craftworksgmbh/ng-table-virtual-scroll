@@ -1,3 +1,7 @@
+# Forked 
+
+Origin Library was forked and this package was published because we needed this PR: https://github.com/diprokon/ng-table-virtual-scroll/pull/66
+
 # Virtual Scroll for Angular Material Table
 
 An Angular Directive, which allow to use [virtual scrolling](https://material.angular.io/cdk/scrolling) in [mat-table](https://material.angular.io/components/table)
